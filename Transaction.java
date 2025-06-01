@@ -46,6 +46,13 @@ public class Transaction {
         return categories;
     }
     
+    /**
+     * Sets the value of a transaction
+     * Pre-condition: Transaction object initialized
+     * Post-condition: Transaction value updated
+     * 
+     * @param value     new value of transaction
+     */
     public void setValue(double value) {
         this.value = value;
     }
