@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
 import java.time.LocalDate;
+// Learned to use LocalDate and IOException from Oracle Docs
 
 public class Budgeter {
     // Set relevant instance variables
@@ -76,10 +77,17 @@ public class Budgeter {
         if (index >= transactions.size()) {
             return 0;
         }
-        if (transactions.get(index).getValue() > 0) {
-            return transactions.get(index).getValue()*(1-taxRate) + netValue(index+1);
+        
+        Transaction transaction = transactions.get(index);
+        double value = transaction.getValue();
+        
+        if (transaction instanceof Income) {
+            Income income = (Income) transaction;
+            if (!income.isTaxFree()) {
+                value *= (1-taxRate);
+            }
         }
-        return transactions.get(index).getValue() + netValue(index+1);
+        return value + netValue(index+1);
     }
     
     /**
